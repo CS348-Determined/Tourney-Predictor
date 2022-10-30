@@ -1,15 +1,32 @@
 import './App.css';
 import './input.css';
-import Button from '@mui/material/Button';
+import ConferenceDetail from './Conference/ConferenceDetail';
+import TeamDetail from './Team/TeamDetail';
+import TeamEdit from './Team/TeamEdit';
+import Home from './Home'
+import {
+  Link,
+  Redirect,
+  Route,
+  Routes,
+  BrowserRouter,
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <h1 class="text-2xl underline">
-        Tourney Predictor
-      </h1>
-      <Button variant="contained">Test Button</Button>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <h1 className="justify-center text-center text-2xl underline">
+          Tourney Predictor
+        </h1>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path={"/team"} element={ <TeamDetail /> } />
+          <Route path={"/conference"} element={ <ConferenceDetail /> } />
+          <Route path={"/teamEdit"} element={ <TeamEdit /> } />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
