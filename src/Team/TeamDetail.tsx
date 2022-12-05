@@ -1,6 +1,5 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MockTeam from './MockTeam';
-import { useParams } from "react-router-dom";
 import { Button } from '../../node_modules/@mui/material/index';
 import { Link } from 'react-router-dom';
 import { useSearchParams } from '../../node_modules/react-router-dom/dist/index';
@@ -20,14 +19,21 @@ function PlayersSection() {
 }
 
 function TeamDetail() {
-  //const { teamId } = useParams<TeamProps>();
   const [searchParams] = useSearchParams();
   const teamId = searchParams.get("teamId");
   const [team, setTeam] = useState<Team | null>();
+  const [temp, setTemp] = useState([]);
   useEffect(() => {
     // Load Team
     console.log("Loading Team" + teamId)
-    setTeam(MockTeam);
+    fetch("http://localhost:8000/team/"+teamId)
+                  .then((res) => res.json())
+                  .then((json) => {
+                      console.log(json[0]);
+                      setTeam(json[0]);
+                  })
+    //setTeam(MockTeam);
+
   },[]);
 
   if (!teamId) {
@@ -42,20 +48,19 @@ function TeamDetail() {
     return(
        <div>
         <div>
-          <h1 className="text-3xl font-bold">{team.Name}</h1>
+          <h1 className="text-3xl font-bold">{team.name}</h1>
           <div>
-            <h2 className="text-xl">Conference: {team.ConferenceName}</h2>
             <Link
               to={{
-                pathname: "/conference",
-                search: `?conferenceId=${team.ConferenceId}`, 
+                pathname: "/league",
+                search: `?leagueId=${team.league_id}`, 
               }}
             >
-              Go to Conference
+              Go to League
             </Link>
           </div>
           
-          <h2 className="">Record: {team.Record}</h2>
+          <h2 className="">Record: {team.record}</h2>
         </div>
         <PlayersSection />
       </div>

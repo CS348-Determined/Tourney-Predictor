@@ -7,58 +7,33 @@ interface TeamProps {
   teamId: String;
 }
 
-function PlayersSection() {
-  return (
-    <div className="App">
-      <h1 className="text-2xl underline">
-        Players
-      </h1>
-    </div>
-  );
-}
-
-function UpdateTeam(team: Team) {
+function PushTeam(team: Team) {
   const requestOptions = {
-    method: 'PUT',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(team)
 };
-fetch("http://localhost:8000/updateTeam/"+team.team_id, requestOptions)
+fetch("http://localhost:8000/addTeam/", requestOptions)
     .then((res) => res.json())
     .then((json) => {
         console.log(json);
     })
 }
 
-const TeamEdit: React.FC<TeamProps> = props => {
-  const [searchParams] = useSearchParams();
-  const teamId = searchParams.get("teamId");
+const AddTeam: React.FC<TeamProps> = props => {
   const [team, setTeam] = useState<Team | null>();
   const [leagues, setLeagues] = useState<string[] | null>();
   useEffect(() => {
     // Load Team
-    fetch("http://localhost:8000/team/"+teamId)
-                  .then((res) => res.json())
-                  .then((json) => {
-                      console.log(json[0]);
-                      setTeam(json[0]);
-                  })
+    setTeam(MockTeam);
     setLeagues(['NFL', "NBA", "NCAA Mens Basketball"])
   },[]);
-
-  if (!teamId) {
-    return (
-      <div>
-        Missing teamId
-      </div>
-    );
-  }
 
   if (team) {
     return(
        <div>
         <div>
-          <h1 className="text-3xl font-bold">Editing {team.name}</h1>
+          <h1 className="text-3xl font-bold">Creating {team.name}</h1>
           <TextField
             variant="outlined"
             margin="normal"
@@ -131,7 +106,7 @@ const TeamEdit: React.FC<TeamProps> = props => {
         </div>
 
         <div>
-          <Button variant="contained" onClick={() => { UpdateTeam(team) }}>Submit Edits</Button>
+          <Button variant="contained" onClick={() => { PushTeam(team) }}>Submit Edits</Button>
         </div>
         
       </div>
@@ -146,4 +121,4 @@ const TeamEdit: React.FC<TeamProps> = props => {
   }
 };
 
-export default TeamEdit;
+export default AddTeam;

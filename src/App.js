@@ -1,8 +1,9 @@
 import './App.css';
 import './input.css';
-import ConferenceDetail from './Conference/ConferenceDetail';
+import LeagueDetail from './League/LeagueDetail';
 import TeamDetail from './Team/TeamDetail';
 import TeamEdit from './Team/TeamEdit';
+import AddTeam from './Team/AddTeam';
 import Home from './Home'
 import {
   Link,
@@ -21,8 +22,9 @@ function App() {
         </h1>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path={"/addTeam"} element={ <AddTeam /> } />
           <Route path={"/team"} element={ <TeamDetail /> } />
-          <Route path={"/conference"} element={ <ConferenceDetail /> } />
+          <Route path={"/league"} element={ <LeagueDetail /> } />
           <Route path={"/teamEdit"} element={ <TeamEdit /> } />
         </Routes>
       </div>

@@ -1,10 +1,8 @@
 const MockTeam: Team = {
-    Id: 1,
-    Name: "Packers",
-    ConferenceName: "NFL",
-    ConferenceId: 1,
-    Record: "1-1",
-    SportName: "Football",
-    SportId: 1
+    team_id: 1,
+    city: "City",
+    name: "New Team",
+    league_id: 1,
+    record: "0-0"
 }
 export default MockTeam;

@@ -1,9 +1,7 @@
 interface Team {
-    Id: Number;
-    Name: String;
-    ConferenceName: String;
-    ConferenceId: Number;
-    SportName: String;
-    SportId: Number;
-    Record: String;
+    team_id: Number;
+    city: String;
+    name: String;
+    league_id: Number;
+    record: String;
 }
