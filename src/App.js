@@ -1,6 +1,7 @@
 import './App.css';
 import './input.css';
 import LeagueDetail from './League/LeagueDetail';
+import BracketDetail from './Bracket/BracketDetail';
 import TeamDetail from './Team/TeamDetail';
 import TeamEdit from './Team/TeamEdit';
 import AddTeam from './Team/AddTeam';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path={"/addTeam"} element={ <AddTeam /> } />
           <Route path={"/team"} element={ <TeamDetail /> } />
+          <Route path={"/bracket"} element={ <BracketDetail /> } />
           <Route path={"/league"} element={ <LeagueDetail /> } />
           <Route path={"/teamEdit"} element={ <TeamEdit /> } />
         </Routes>
