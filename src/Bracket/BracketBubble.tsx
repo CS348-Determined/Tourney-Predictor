@@ -81,8 +81,8 @@ function BracketBubble({entry}: BubbleProps) {
                 <div className="BracketBubble">
                     <div className="inline-block p-1 rounded-md border-2 border-black">
                         <div className="underline">{gameText}</div>
-                        <LoserName team={team2}/>
-                        <WinnerName team={team1} />
+                        <LoserName team={team1}/>
+                        <WinnerName team={team2} />
                     </div>
                 </div>
             );

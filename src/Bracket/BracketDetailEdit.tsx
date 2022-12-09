@@ -3,11 +3,12 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from '../../node_modules/@mui/material/index';
 import { useSearchParams } from '../../node_modules/react-router-dom/dist/index';
 import BracketBubble from './BracketBubble';
+import EditBracketBubble from './EditBracketBubble';
 import MockBracket from './MockBracket';
 import MockBracketEntry from './MockBracketEntry';
 
 
-function BracketDetail() {
+function BracketDetailEdit() {
   const [searchParams] = useSearchParams();
   const bracketId = searchParams.get("bracketId");
   const [bracket, setBracket] = useState<Bracket | null>();
@@ -46,12 +47,12 @@ function BracketDetail() {
   }
   function RoundColumn({round}: roundColProps) {
     let col: JSX.Element[] = []
-    let colEntries = bracketEntries.filter(function(BracketEntry) { return BracketEntry.round == round;})
+    let colEntries = bracketEntries.filter(function(BracketEntry) { return BracketEntry.round === round;})
     colEntries.map((post) => (
         //<BracketBubble bracketEntryId={post.entry_id}/>
         col.push(
             <div className="py-1">
-                <BracketBubble entry={post}/>
+                <EditBracketBubble entry={post} otherEntries={bracketEntries} totalRounds={bracket.num_rounds}/>
             </div>
         )
     ))
@@ -79,11 +80,11 @@ function BracketDetail() {
               </div>
               <Link
                 to={{
-                  pathname: "/bracketEdit",
+                  pathname: "/bracket",
                   search: `?bracketId=${bracket.bracket_id}`, 
                 }}
                 className="inline-block font-bold bg-gray-400 rounded-md px-1 align-middle" >
-                  Edit Bracket
+                  Back to Original Bracket Page
               </Link>
             </div>
             
@@ -101,4 +102,4 @@ function BracketDetail() {
   }
 };
 
-export default BracketDetail;
+export default BracketDetailEdit;

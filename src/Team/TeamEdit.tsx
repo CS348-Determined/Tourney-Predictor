@@ -22,12 +22,13 @@ function UpdateTeam(team: Team) {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(team)
-};
-fetch("http://localhost:8000/updateTeam/"+team.team_id, requestOptions)
+  };
+  fetch("http://localhost:8000/updateTeam/"+team.team_id, requestOptions)
     .then((res) => res.json())
+    
     .then((json) => {
         console.log(json);
-    })
+  })
 }
 
 const TeamEdit: React.FC<TeamProps> = props => {
