@@ -33,7 +33,7 @@ const AddGame: React.FC<GameProps> = props => {
     return(
        <div>
         <div>
-          
+        <h1 className="text-3xl font-bold">Create Game</h1>
           <div>
           <TextField
             variant="outlined"
@@ -91,7 +91,7 @@ const AddGame: React.FC<GameProps> = props => {
         </div>
 
         <div>
-          <Button variant="contained" onClick={() => { PushGame(game) }}>Submit Edits</Button>
+          <Button variant="contained" onClick={() => { PushGame(game) }}>Create Game</Button>
         </div>
         
       </div>
