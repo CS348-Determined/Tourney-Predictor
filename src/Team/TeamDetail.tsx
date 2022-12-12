@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import MockTeam from './MockTeam';
-import { Button } from '../../node_modules/@mui/material/index';
 import { Link } from 'react-router-dom';
 import { useSearchParams } from '../../node_modules/react-router-dom/dist/index';
 
