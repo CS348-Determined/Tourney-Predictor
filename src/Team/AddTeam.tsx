@@ -9,27 +9,36 @@ interface TeamProps {
 
 function PushTeam(team: Team) {
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(team)
-};
-fetch("http://localhost:8000/addTeam/", requestOptions)
-    .then((res) => res.json())
-    .then((json) => {
-        console.log(json);
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(team)
+  };
+  fetch("http://localhost:8000/addTeam/", requestOptions)
+      .then((res) => res.json())
+      .then((json) => {
+          console.log(json);
     })
 }
 
 const AddTeam: React.FC<TeamProps> = props => {
   const [team, setTeam] = useState<Team | null>();
-  const [leagues, setLeagues] = useState<string[] | null>();
+  const [leagues, setLeagues] = useState<League[] | null>();
+  const [selectedLeague, setSelectedLeague] = useState<League | null>();
   useEffect(() => {
     // Load Team
     setTeam(MockTeam);
-    setLeagues(['NFL', "NBA", "NCAA Mens Basketball"])
+
+    fetch("http://localhost:8000/allLeagues")
+                  .then((res) => res.json())
+                  .then((json) => {
+                      console.log(json);
+                      setLeagues(json);
+                  })
+
+    //setLeagues(['NFL', "NBA", "NCAA Mens Basketball"])
   },[]);
 
-  if (team) {
+  if (team && leagues) {
     return(
        <div>
         <div>
@@ -50,23 +59,25 @@ const AddTeam: React.FC<TeamProps> = props => {
             }} 
           />
           
-         <div>
-          <Select labelId="League" id="League" value={team.league_id}
+          <div>
+
+          <Select labelId="League" id="League" value={selectedLeague}
             onChange={(event: { target: { value: any; }; }) => {
+              setSelectedLeague(event.target.value)
               setTeam({
                 ...team,
-                league_id: event.target.value
+                league_id: event.target.value.league_id
               })
             }} 
             >
             {leagues.map(option => {
               return (
-                <MenuItem value={option}>{option}</MenuItem>
+                <MenuItem value={option}>{option.name}</MenuItem>
               )
             })}
           </Select>
         </div>
-
+        {/*
         <div>
           <TextField
             variant="outlined"
@@ -84,6 +95,7 @@ const AddTeam: React.FC<TeamProps> = props => {
             }} 
           />
         </div>
+          */}
           
           <div>
             <TextField
