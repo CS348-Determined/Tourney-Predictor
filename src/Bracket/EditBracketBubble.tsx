@@ -33,6 +33,17 @@ function EditBracketBubble({entry, otherEntries, totalRounds}: BubbleProps) {
         return out
     }
 
+    function getRoundWinners(allTeams: Team[], round: Number) {
+        if (round === 0) return allTeams;
+        let output: Team[] = []
+        let filteredEntries = otherEntries.filter(function(BracketEntry) { return BracketEntry.round === round;})
+        for (const entry of filteredEntries) {
+            if (entry.team1_victor) output.push(allTeams.find(function(Team) { return Team.team_id === entry.team1_id;}))
+            else output.push(allTeams.find(function(Team) { return Team.team_id === entry.team2_id;}))
+        }
+        return output;
+      }
+
     function updateEntry(entry: BracketEntry) {
         const requestOptions = {
             method: 'PUT',
@@ -64,7 +75,7 @@ function EditBracketBubble({entry, otherEntries, totalRounds}: BubbleProps) {
             .then((res) => res.json())
             .then((json) => {
                 //console.log(json);
-                setTeamChoices(getValidTeams(json));
+                setTeamChoices(getRoundWinners(json, entry.round-1));
             })
     },[]);
 
