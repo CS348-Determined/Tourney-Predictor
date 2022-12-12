@@ -7,6 +7,9 @@ import BracketDetailEdit from './Bracket/BracketDetailEdit';
 import TeamDetail from './Team/TeamDetail';
 import TeamEdit from './Team/TeamEdit';
 import AddTeam from './Team/AddTeam';
+import AddGame from './Game/AddGame';
+import EditGame from './Game/EditGame';
+import GameDetail from './Game/GameDetail';
 import Home from './Home'
 import AddPosition from './Position/AddPosition'
 import PositionEdit from './Position/PositionEdit'
@@ -37,11 +40,12 @@ function App() {
           <Route path={"/bracketEdit"} element={ <BracketDetailEdit /> } />
           <Route path={"/league"} element={ <LeagueDetail /> } />
           <Route path={"/teamEdit"} element={ <TeamEdit /> } />
+          <Route path={"/addGame"} element={ <AddGame /> } />
+          <Route path={"/editGame"} element={ <EditGame /> } />
+          <Route path={"/game"} element={ <GameDetail /> } />
           <Route path={"/addPosition"} element={ <AddPosition/> } />
           <Route path={"/positionEdit"} element={ <PositionEdit/> } />
           <Route path={"/positionDetail"} element={ <PositionDetail/> } />
-
-
 
         </Routes>
       </div>
