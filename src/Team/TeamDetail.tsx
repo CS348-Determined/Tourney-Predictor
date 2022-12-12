@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import MockTeam from './MockTeam';
-import { Button } from '../../node_modules/@mui/material/index';
 import { Link } from 'react-router-dom';
 import { useSearchParams } from '../../node_modules/react-router-dom/dist/index';
 
@@ -8,21 +6,11 @@ type TeamProps = {
   teamId: string;
 };
 
-function PlayersSection() {
-  return (
-    <div className="App">
-      <h1 className="text-2xl underline">
-        Players
-      </h1>
-    </div>
-  );
-}
-
 function TeamDetail() {
   const [searchParams] = useSearchParams();
   const teamId = searchParams.get("teamId");
   const [team, setTeam] = useState<Team | null>();
-  const [temp, setTemp] = useState([]);
+  const [players, setPlayers] = useState<Player[] | null>();
   useEffect(() => {
     // Load Team
     console.log("Loading Team" + teamId)
@@ -32,9 +20,43 @@ function TeamDetail() {
                       console.log(json[0]);
                       setTeam(json[0]);
                   })
+    fetch("http://localhost:8000/getPlayersForTeam/"+teamId)
+                  .then((res) => res.json())
+                  .then((json) => {
+                      console.log(json);
+                      setPlayers(json);
+                  })
     //setTeam(MockTeam);
 
   },[]);
+
+  function PlayersSection() {
+    let playersList: JSX.Element[] = []
+    if (players != null) {
+      players.map((player) => (
+        playersList.push(
+          <Link
+            to={{
+              pathname: "/player",
+              search: `?playerId=${player.player_id}`, 
+            }}
+            className="inline-block p-1" >
+              { player.name }
+          </Link>
+        )
+      ))
+    }
+    return (
+      <div className="App">
+        <h1 className="text-2xl underline">
+          Players
+        </h1>
+        <div>
+          {playersList}
+        </div>
+      </div>
+    );
+  }
 
   if (!teamId) {
     return (
