@@ -4,6 +4,9 @@ import LeagueDetail from './League/LeagueDetail';
 import TeamDetail from './Team/TeamDetail';
 import TeamEdit from './Team/TeamEdit';
 import AddTeam from './Team/AddTeam';
+import AddGame from './Game/AddGame';
+import EditGame from './Game/EditGame';
+import GameDetail from './Game/GameDetail';
 import Home from './Home'
 import {
   Link,
@@ -26,6 +29,9 @@ function App() {
           <Route path={"/team"} element={ <TeamDetail /> } />
           <Route path={"/league"} element={ <LeagueDetail /> } />
           <Route path={"/teamEdit"} element={ <TeamEdit /> } />
+          <Route path={"/addGame"} element={ <AddGame /> } />
+          <Route path={"/editGame"} element={ <EditGame /> } />
+          <Route path={"/game"} element={ <GameDetail /> } />
         </Routes>
       </div>
     </BrowserRouter>
