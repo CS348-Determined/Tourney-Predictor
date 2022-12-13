@@ -5,6 +5,9 @@ import TeamDetail from './Team/TeamDetail';
 import TeamEdit from './Team/TeamEdit';
 import AddTeam from './Team/AddTeam';
 import Home from './Home'
+import AddPlayer from './Player/AddPlayer'
+import PlayerDetail from './Player/PlayerDetail'
+import PlayerEdit from './Player/PlayerEdit'
 import {
   Link,
   Redirect,
@@ -26,6 +29,9 @@ function App() {
           <Route path={"/team"} element={ <TeamDetail /> } />
           <Route path={"/league"} element={ <LeagueDetail /> } />
           <Route path={"/teamEdit"} element={ <TeamEdit /> } />
+          <Route path={"/addPlayer"} element={ <AddPlayer /> } />
+          <Route path={"/player"} element={ <PlayerDetail /> } />
+          <Route path={"/playerEdit"} element={ <PlayerEdit /> } />
         </Routes>
       </div>
     </BrowserRouter>
